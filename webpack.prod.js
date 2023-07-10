@@ -34,7 +34,8 @@ module.exports = {
   },
   externals: {
     react: 'react',
-    'react-dom': 'react-dom',
-    'styled-components': 'styled-components',
+    '@emotion/cache': '@emotion/cache',
+    '@emotion/react': '@emotion/react',
+    '@emotion/styled': '@emotion/styled',
   },
 };
