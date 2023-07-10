@@ -1,16 +1,30 @@
-import React from 'react';
-import { Button } from './components'
-// import { Button as BuildButton } from '../dist'
+import React, { useRef, useState, useEffect } from 'react';
+import { Button, StyleProvider } from './components'
 
 const App = () => {
+  const containerRef = useRef();
+  const [containerNode, setContainerNode] = useState(document.querySelector('#root'));
+
+  useEffect(() => {
+    setContainerNode(containerRef.current)
+  }, [])
+
   return (
-    <div>
-      <h1>Micro frontend UI</h1>
-      <Button>Normal</Button>
-      <Button primary>Primary</Button>
-      {/* <BuildButton>Normal</BuildButton>
-      <BuildButton primary>Primary</BuildButton> */}
-    </div>
+    <StyleProvider
+      namespace="micro-frontend-app"
+      container={containerNode}
+      theme={{
+        colors: {
+          primary: '#BF4F74'
+        }
+      }}
+    >
+      <div ref={containerRef}>
+        <h1>Micro frontend UI</h1>
+        <Button>Normal</Button>
+        <Button primary>Primary</Button>
+      </div>
+    </StyleProvider>
   );
 };
 

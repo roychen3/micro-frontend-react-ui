@@ -1,15 +1,17 @@
 import React from 'react';
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 
 const StyledButton = styled.button`
   /* Adapt the colors based on primary prop */
-  background: ${props => props.$primary ? "#BF4F74" : "white"};
-  color: ${props => props.$primary ? "white" : "#BF4F74"};
+  background: ${props => props.$primary ? props.theme.colors.primary : "white"};
+  color: ${props => props.$primary ? "white" : props.theme.colors.primary};
 
   font-size: 1em;
   margin: 1em;
   padding: 0.25em 1em;
-  border: 2px solid #BF4F74;
+  border-width: 2px;
+  border-style:  solid;
+  border-color: ${props => props.theme.colors.primary};
   border-radius: 3px;
 `;
 
