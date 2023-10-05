@@ -2,13 +2,6 @@
 
 This react ui lib is for [micro-fronted](https://github.com/roychen3/micro-frontends) app.
 
-
-## Getting Started
-
-```bash
-npm run start
-```
-
 ## Installation
 
 node v16.15.0
