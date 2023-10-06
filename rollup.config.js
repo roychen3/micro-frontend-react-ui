@@ -11,16 +11,11 @@ export default [
     input: 'src/index.ts',
     output: [
       {
+        format: 'umd',
+        sourcemap: true,
+        name: 'MicroFrontendReactUI',
         file: packageJson.main,
-        format: 'cjs',
-        sourcemap: true,
-        interop: 'auto', // fix `typeError: XXX is not a function` in jest env.
-      },
-      {
-        file: packageJson.module,
-        format: 'esm',
-        sourcemap: true,
-        interop: 'auto', // fix `typeError: XXX is not a function` in jest env.
+        // interop: 'auto', // fix `typeError: XXX is not a function` in jest env.
       },
     ],
     plugins: [
@@ -30,11 +25,6 @@ export default [
       typescript({ tsconfig: './tsconfig.json' }),
       terser(),
     ],
-    external: [
-      '@emotion/react',
-      '@emotion/styled',
-      'react',
-      'react-dom',
-    ],
+    external: ['@emotion/react', '@emotion/styled', 'react', 'react-dom'],
   },
 ];

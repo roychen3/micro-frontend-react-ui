@@ -1,4 +1,5 @@
-import { StyleProvider, Button } from 'micro-frontend-react-ui';
+// import { StyleProvider, Button } from 'micro-frontend-react-ui';
+import { StyleProvider, Button } from './components';
 
 export default function RenderAllComponents() {
   return (
