@@ -1,11 +1,13 @@
 {
   "name": "micro-frontend-react-ui",
-  "version": "1.0.18",
+  "version": "1.0.22",
   "author": "Roy chen <roy850323@gmail.com>",
-  "main": "dist/cjs/index.js",
-  "module": "dist/es/index.js",
+  "main": "cjs/index.js",
+  "module": "es/index.js",
   "files": [
-    "dist"
+    "cjs/*",
+    "es/*",
+    "umd/*"
   ],
   "license": "MIT",
   "repository": {

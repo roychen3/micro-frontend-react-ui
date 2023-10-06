@@ -8,12 +8,18 @@ export default [
   {
     input: 'src/index.ts',
     output: {
-      format: 'cjs',
+      format: 'umd',
+      file: 'umd/micro-frontend-react-ui.js',
+      name: 'microFrontendReactUi',
+      esModule: false,
       sourcemap: true,
-      preserveModules: true,
-      preserveModulesRoot: 'src',
-      dir: 'dist/cjs',
-      interop: 'auto', // fix `typeError: XXX is not a function` in jest env.
+      globals: {
+        '@emotion/react': 'EmotionReact',
+        '@emotion/styled': 'Styled',
+        '@emotion/cache': 'createCache',
+        react: 'React',
+        'react-dom': 'ReactDOM',
+      },
     },
     plugins: [
       peerDepsExternal(),
@@ -22,22 +28,39 @@ export default [
       typescript({
         tsconfig: './tsconfig.json',
         compilerOptions: {
-          outDir: 'dist/cjs',
+          outDir: 'umd',
         },
       }),
       terser(),
     ],
-    external: ['@emotion/react', '@emotion/styled', 'react', 'react-dom'],
+    external: [
+      '@emotion/react',
+      '@emotion/styled',
+      '@emotion/cache',
+      'react',
+      'react-dom',
+    ],
   },
   {
-    input: 'src/index.ts',
+    input: {
+      index: 'src/index.ts',
+      button: 'src/Button/index.tsx',
+      styleProvider: 'src/StyleProvider/index.tsx',
+      useTheme: 'src/useTheme/index.tsx',
+    },
     output: {
       format: 'es',
+      dir: 'es',
+      exports: 'named',
       sourcemap: true,
-      preserveModules: true,
-      preserveModulesRoot: 'src',
-      dir: 'dist/es',
-      interop: 'auto', // fix `typeError: XXX is not a function` in jest env.
+      entryFileNames: (chunkinfo) => {
+        if (chunkinfo.name === 'index') return '[name].js';
+        return '[name]/index.js';
+      },
+      chunkFileNames: (chunkinfo) => {
+        if (chunkinfo.name === 'index') return '[name].js';
+        return '[name]/[name].js';
+      },
     },
     plugins: [
       peerDepsExternal(),
@@ -46,11 +69,58 @@ export default [
       typescript({
         tsconfig: './tsconfig.json',
         compilerOptions: {
-          outDir: 'dist/es',
+          outDir: 'es',
         },
       }),
       terser(),
     ],
-    external: ['@emotion/react', '@emotion/styled', 'react', 'react-dom'],
+    external: [
+      '@emotion/react',
+      '@emotion/styled',
+      '@emotion/cache',
+      'react',
+      'react-dom',
+    ],
+  },
+  {
+    input: {
+      index: 'src/index.ts',
+      button: 'src/Button/index.tsx',
+      styleProvider: 'src/StyleProvider/index.tsx',
+      useTheme: 'src/useTheme/index.tsx',
+    },
+    output: {
+      format: 'cjs',
+      dir: 'cjs',
+      exports: 'named',
+      sourcemap: true,
+      entryFileNames: (chunkinfo) => {
+        if (chunkinfo.name === 'index') return '[name].js';
+        return '[name]/index.js';
+      },
+      chunkFileNames: (chunkinfo) => {
+        if (chunkinfo.name === 'index') return '[name].js';
+        return '[name]/[name].js';
+      },
+    },
+    plugins: [
+      peerDepsExternal(),
+      resolve(),
+      commonjs(),
+      typescript({
+        tsconfig: './tsconfig.json',
+        compilerOptions: {
+          outDir: 'cjs',
+        },
+      }),
+      terser(),
+    ],
+    external: [
+      '@emotion/react',
+      '@emotion/styled',
+      '@emotion/cache',
+      'react',
+      'react-dom',
+    ],
   },
 ];
