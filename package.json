@@ -1,8 +1,9 @@
 {
   "name": "micro-frontend-react-ui",
-  "version": "1.0.15",
+  "version": "1.0.18",
   "author": "Roy chen <roy850323@gmail.com>",
-  "main": "dist/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
   "files": [
     "dist"
   ],
